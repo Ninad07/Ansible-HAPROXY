@@ -1,0 +1,20 @@
+---
+# tasks file for webserver
+
+- name: Installing HTTPD
+  package: 
+    name: httpd
+    state: present
+  become: true
+
+- name: Configuring the Webpage
+  copy: 
+    content: "Host Server : {{ ansible_hostname }}"
+    dest: /var/www/html/index.html
+  become: true
+
+- name: Starting Services
+  service:
+    name: httpd
+    state: started
+  become: true
